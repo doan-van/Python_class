@@ -21,7 +21,6 @@ ax.coastlines(resolution='10m',lw=.5, color='gray')
 
 ax.stock_img()
 df = pd.read_csv('input_data/AMeDAS_stations.csv', index_col=0)
-
 ax.scatter(df.longitude, df.latitude, color='r', marker='^')
 
 
@@ -41,19 +40,35 @@ def plot_map_scatter(lon, lat, extent):
 
     ax.stock_img()
 
-    ax.scatter(lon, lat, color='k', marker='o')
+    ax.scatter(lon, lat, color='g', marker='o',)
     
-
+    return fig, ax
 
 
 extent = [126,150,25, 50]
 lon, lat = df.longitude, df.latitude
 
-plot_map_scatter(lon, lat, extent)
+fig, ax = plot_map_scatter(lon, lat, extent)
 
+# add text
+ax.text(.2, .8, 'AMeDAS location', 
+        fontsize = 20, 
+        transform = ax.transAxes,
+        )
 
-
-
+# grid
+import matplotlib.ticker as mticker
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                  linewidth=2, color='gray', alpha=0.5, linestyle='--')
+gl.xlabels_top = False
+gl.ylabels_left = False
+gl.xlines = False
+gl.xlocator = mticker.FixedLocator([-180, -45, 0, 45, 140])
+gl.xformatter = LONGITUDE_FORMATTER
+gl.yformatter = LATITUDE_FORMATTER
+gl.xlabel_style = {'size': 15, 'color': 'gray'}
+gl.xlabel_style = {'color': 'red', 'weight': 'bold'}
 
 
 
