@@ -16,7 +16,6 @@ proj =  ccrs.PlateCarree()
 fig = plt.figure(figsize=(4, 4))
 ax = plt.axes([.05,0.05,.9,.9], projection= proj )
 
-
 ax.set_extent([126,150,25, 50])
 ax.coastlines(resolution='10m',lw=.5, color='gray')
 
@@ -29,9 +28,28 @@ ax.scatter(df.longitude, df.latitude, color='r', marker='^')
 
 
 
+# plot using function
+def plot_map_scatter(lon, lat, extent):
+    proj =  ccrs.PlateCarree()
+
+    fig = plt.figure(figsize=(4, 4))
+    ax = plt.axes([.05,0.05,.9,.9], projection= proj )
+
+
+    ax.set_extent(extent)
+    ax.coastlines(resolution='10m',lw=.5, color='gray')
+
+    ax.stock_img()
+
+    ax.scatter(lon, lat, color='k', marker='o')
+    
 
 
 
+extent = [126,150,25, 50]
+lon, lat = df.longitude, df.latitude
+
+plot_map_scatter(lon, lat, extent)
 
 
 

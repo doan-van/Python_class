@@ -50,14 +50,14 @@ ax.scatter(da.longitude, da.latitude, color=cols, marker='^')
 
 
 
-
+'''
 # do k-means
 from sklearn.cluster import KMeans
 
 k_means = KMeans(init="k-means++", n_clusters=5, n_init=10)
 k_means.fit(X)
 clus = k_means.labels_
-
+'''
 
 
 
