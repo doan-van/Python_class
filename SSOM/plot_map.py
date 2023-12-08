@@ -9,8 +9,11 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy
 import pandas as pd
+import sys
 
 
+
+'''
 proj =  ccrs.PlateCarree()
 
 fig = plt.figure(figsize=(4, 4))
@@ -20,8 +23,18 @@ ax.set_extent([126,150,25, 50])
 ax.coastlines(resolution='10m',lw=.5, color='gray')
 
 ax.stock_img()
-df = pd.read_csv('input_data/AMeDAS_stations.csv', index_col=0)
-ax.scatter(df.longitude, df.latitude, color='r', marker='^')
+
+
+
+ax.scatter(df.longitude, df.latitude, color='k', marker='o')
+'''
+
+
+
+
+
+
+
 
 
 
@@ -33,22 +46,38 @@ def plot_map_scatter(lon, lat, extent):
 
     fig = plt.figure(figsize=(4, 4))
     ax = plt.axes([.05,0.05,.9,.9], projection= proj )
-
-
     ax.set_extent(extent)
     ax.coastlines(resolution='10m',lw=.5, color='gray')
-
     ax.stock_img()
-
-    ax.scatter(lon, lat, color='g', marker='o',)
-    
+    ax.scatter(lon, lat, color='g', marker='o',)    
     return fig, ax
 
 
+
+
+
+
+
+
+df = pd.read_csv('input_data/AMeDAS_stations.csv', index_col=0)
+
 extent = [126,150,25, 50]
 lon, lat = df.longitude, df.latitude
-
 fig, ax = plot_map_scatter(lon, lat, extent)
+
+
+
+#extent = [100,150,25, 50]
+#fig, ax = plot_map_scatter(lon, lat, extent)
+
+
+
+
+
+
+
+
+
 
 # add text
 ax.text(.2, .8, 'AMeDAS location', 
@@ -63,11 +92,11 @@ gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                   linewidth=2, color='gray', alpha=0.5, linestyle='--')
 gl.xlabels_top = False
 gl.ylabels_left = False
-gl.xlines = False
-gl.xlocator = mticker.FixedLocator([-180, -45, 0, 45, 140])
+gl.xlines = True
+gl.xlocator = mticker.FixedLocator([-180, -45, 0, 45, 135, 140])
 gl.xformatter = LONGITUDE_FORMATTER
 gl.yformatter = LATITUDE_FORMATTER
-gl.xlabel_style = {'size': 15, 'color': 'gray'}
+gl.xlabel_style = {'size': 30, 'color': 'red'}
 gl.xlabel_style = {'color': 'red', 'weight': 'bold'}
 
 

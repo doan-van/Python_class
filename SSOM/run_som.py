@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from sompy import som
 # plot results
 import cartopy.crs as ccrs
-
+import sys
 
 
 
@@ -17,14 +17,16 @@ X = df.values
 
 
 
-somout = som(X, 5, iterate = 5000, sim='ed') 
+somout = som(X, 3, iterate = 5000, sim='ed') 
 clus = somout['bmu_proj_fin']
 y = somout['som']
 
 
 
-proj =  ccrs.PlateCarree()
 
+
+
+proj =  ccrs.PlateCarree()
 fig = plt.figure(figsize=(4, 4))
 ax = plt.axes([.05,0.05,.9,.9], projection= proj )
 
@@ -50,14 +52,11 @@ ax.scatter(da.longitude, da.latitude, color=cols, marker='^')
 
 
 
-'''
-# do k-means
-from sklearn.cluster import KMeans
 
-k_means = KMeans(init="k-means++", n_clusters=5, n_init=10)
-k_means.fit(X)
-clus = k_means.labels_
-'''
+
+
+
+
 
 
 
